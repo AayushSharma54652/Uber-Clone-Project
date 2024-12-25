@@ -83,3 +83,70 @@ Example:
   "error": "All fields are required"
 }
 ```
+
+# User Profile Endpoint
+
+## GET /users/profile
+
+### Description
+This endpoint is used to retrieve the profile of the authenticated user.
+
+### Responses
+
+#### Success
+- **Status Code**: `200 OK`
+- **Response Body**: A JSON object containing the user's profile information.
+
+Example:
+```json
+{
+  "_id": "60c72b2f9b1e8b001c8e4d3b",
+  "fullname": {
+    "firstname": "John",
+    "lastname": "Doe"
+  },
+  "email": "john.doe@example.com"
+}
+```
+
+#### Unauthorized
+- **Status Code**: `401 Unauthorized`
+- **Response Body**: A JSON object containing an error message indicating that the user is not authenticated.
+
+Example:
+```json
+{
+  "error": "Unauthorized"
+}
+```
+
+# User Logout Endpoint
+
+## GET /users/logout
+
+### Description
+This endpoint is used to log out the authenticated user.
+
+### Responses
+
+#### Success
+- **Status Code**: `200 OK`
+- **Response Body**: A JSON object containing a message indicating that the logout was successful.
+
+Example:
+```json
+{
+  "message": "Logout successful"
+}
+```
+
+#### Unauthorized
+- **Status Code**: `401 Unauthorized`
+- **Response Body**: A JSON object containing an error message indicating that the user is not authenticated.
+
+Example:
+```json
+{
+  "error": "Unauthorized"
+}
+```
