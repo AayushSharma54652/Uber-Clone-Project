@@ -11,7 +11,7 @@ const UserSignup = () => {
   const submitHandler = async (e) => {
     e.preventDefault()
     setUserData({
-      fullname: {
+      fullName: {
         firstname: firstName,
         lastname: lastName
       },
