@@ -150,3 +150,179 @@ Example:
   "error": "Unauthorized"
 }
 ```
+
+# Captain Registration Endpoint
+
+## POST /captains/register
+
+### Description
+This endpoint is used to register a new captain. It requires the captain's first name, last name, email, password, and vehicle information.
+
+### Request Body
+The request body should be a JSON object containing the following fields:
+- `fullname`: An object containing:
+  - `firstname`: The captain's first name (minimum 3 characters).
+  - `lastname`: The captain's last name (minimum 3 characters, optional).
+- `email`: The captain's email address (must be a valid email).
+- `password`: The captain's password (minimum 6 characters).
+- `vehicle`: An object containing:
+  - `color`: The vehicle's color.
+  - `plate`: The vehicle's plate number.
+  - `capacity`: The vehicle's capacity.
+  - `type`: The vehicle's type (e.g., car, auto, moto).
+
+Example:
+```json
+{
+  "fullname": {
+    "firstname": "Jane",
+    "lastname": "Doe"
+  },
+  "email": "jane.doe@example.com",
+  "password": "password123",
+  "vehicle": {
+    "color": "Red",
+    "plate": "XYZ123",
+    "capacity": 4,
+    "type": "car"
+  }
+}
+```
+
+### Responses
+
+#### Success
+- **Status Code**: `201 Created`
+- **Response Body**: A JSON object containing the newly created captain and an authentication token.
+
+Example:
+```json
+{
+  "captain": {
+    "_id": "60c72b2f9b1e8b001c8e4d3b",
+    "fullname": {
+      "firstname": "Jane",
+      "lastname": "Doe"
+    },
+    "email": "jane.doe@example.com",
+    "vehicle": {
+      "color": "Red",
+      "plate": "XYZ123",
+      "capacity": 4,
+      "type": "car"
+    }
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+#### Validation Errors
+- **Status Code**: `400 Bad Request`
+- **Response Body**: A JSON object containing an array of validation errors.
+
+Example:
+```json
+{
+  "errors": [
+    {
+      "msg": "Email is not valid",
+      "param": "email",
+      "location": "body"
+    },
+    {
+      "msg": "First name must be at least 3 characters long",
+      "param": "fullname.firstname",
+      "location": "body"
+    },
+    {
+      "msg": "Password must be at least 6 characters long",
+      "param": "password",
+      "location": "body"
+    }
+  ]
+}
+```
+
+#### Missing Fields
+- **Status Code**: `400 Bad Request`
+- **Response Body**: A JSON object containing an error message indicating that all fields are required.
+
+Example:
+```json
+{
+  "error": "All fields are required"
+}
+```
+
+# Captain Profile Endpoint
+
+## GET /captains/profile
+
+### Description
+This endpoint is used to retrieve the profile of the authenticated captain.
+
+### Responses
+
+#### Success
+- **Status Code**: `200 OK`
+- **Response Body**: A JSON object containing the captain's profile information.
+
+Example:
+```json
+{
+  "_id": "60c72b2f9b1e8b001c8e4d3b",
+  "fullname": {
+    "firstname": "Jane",
+    "lastname": "Doe"
+  },
+  "email": "jane.doe@example.com",
+  "vehicle": {
+    "color": "Red",
+    "plate": "XYZ123",
+    "capacity": 4,
+    "type": "car"
+  }
+}
+```
+
+#### Unauthorized
+- **Status Code**: `401 Unauthorized`
+- **Response Body**: A JSON object containing an error message indicating that the captain is not authenticated.
+
+Example:
+```json
+{
+  "error": "Unauthorized"
+}
+```
+
+# Captain Logout Endpoint
+
+## GET /captains/logout
+
+### Description
+This endpoint is used to log out the authenticated captain.
+
+### Responses
+
+#### Success
+- **Status Code**: `200 OK`
+- **Response Body**: A JSON object containing a message indicating that the logout was successful.
+
+Example:
+```json
+{
+  "message": "Logout successful"
+}
+```
+
+#### Unauthorized
+- **Status Code**: `401 Unauthorized`
+- **Response Body**: A JSON object containing an error message indicating that the captain is not authenticated.
+
+Example:
+```json
+{
+  "error": "Unauthorized"
+}
+```
