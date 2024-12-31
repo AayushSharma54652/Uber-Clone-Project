@@ -44,7 +44,7 @@ const CaptainSignup = () => {
     if (response.status === 201) {
       const data = response.data
       setCaptain(data.captain)
-      localStorage.setItem('token', data.token)
+      localStorage.setItem('captain-token', data.token)
       navigate('/captain-home')
     }
 
@@ -90,7 +90,7 @@ const CaptainSignup = () => {
               }}
             />
           </div>
-          
+
           <h3 className='text-lg font-medium mb-2'>What's our Captain's email</h3>
           <input
             required
